@@ -1,0 +1,59 @@
+body {
+    padding: 50px;
+}
+h1 {
+    color:#dc3545 ;
+}
+h5 {
+padding-top: 0.4rem;    
+}
+.logo {
+    padding-left: 2rem;
+}
+.reg-form {
+    width: 30rem;
+}
+.buttons {
+display: flex;
+justify-content: space-between;
+}
+.btn-login {
+    background-color: inherit;
+    color: #0d6efd;
+    border: none;
+    padding: 0;
+}
+.btn-login:hover {
+    background-color: inherit;
+    color: #599cff;
+}
+
+.table-station {
+    margin: auto;
+    width: 50rem;
+    padding: 20rem;
+}
+.table-row {
+    text-align: center;
+    vertical-align:middle;
+}
+.table-header th {
+text-align: center;
+}
+.form-logout {
+margin: 0;
+}
+
+.welcome {
+    display: flex;
+    padding-right: 1rem;
+width: 20rem;
+justify-content: space-between;
+}
+.station-title {
+    padding-top: 5rem;
+padding-left: 10rem;
+}
+.staff-title {
+    padding-top: 5rem;
+}
