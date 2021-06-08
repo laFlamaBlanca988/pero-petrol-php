@@ -21,11 +21,11 @@ $staff = $statement->fetchAll(PDO::FETCH_ASSOC);
 
     <?php require_once 'station.php';?>
 
-    <h3 class="staff-title">Staff</h3>
-    <table class="table">
+    <h3 class="staff-title">Your profile</h3>
+    <table class=" table-staff table ">
         <thead>
             <tr>
-                <th scope="col">#</th>
+                <!-- <th scope="col">#</th> -->
                 <th scope="col">First Name</th>
                 <th scope="col">Last Name</th>
                 <th scope="col">Experience</th>
@@ -37,7 +37,7 @@ $staff = $statement->fetchAll(PDO::FETCH_ASSOC);
         </thead>
         <tbody>
             <tr>
-                <th scope="row"><?php echo $i + 1 ?></th>
+                <!-- <th scope="row"><?php echo $i + 1 ?></th> -->
                 <td><?php echo $_SESSION['firstName'] ?></td>
                 <td><?php echo $_SESSION['lastName'] ?></td>
                 <td><?php echo $_SESSION['experience'] ?></td>

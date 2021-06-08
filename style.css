@@ -1,5 +1,6 @@
 body {
-    padding: 50px;
+    /* padding: 50px; */
+    padding-top: 0;
 }
 h1 {
     color:#dc3545 ;
@@ -7,10 +8,19 @@ h1 {
 h5 {
 padding-top: 0.4rem;    
 }
+
+.navbar-custom {
+    padding: 0.5rem;
+    margin: 0;
+}
 .logo {
     padding-left: 2rem;
 }
-.reg-form {
+
+.login-title {
+    padding-top: 3rem;
+}
+.login-form {
     width: 30rem;
 }
 .buttons {
@@ -32,6 +42,10 @@ justify-content: space-between;
     margin: auto;
     width: 50rem;
     padding: 20rem;
+}
+.table-staff{
+    margin: auto;
+    width: 50rem;
 }
 .table-row {
     text-align: center;
@@ -56,4 +70,10 @@ padding-left: 10rem;
 }
 .staff-title {
     padding-top: 5rem;
+    padding-left: 10rem;
 }
+.staff-admin {
+    padding-top: 5rem;
+    padding-bottom: 1rem;
+}
+

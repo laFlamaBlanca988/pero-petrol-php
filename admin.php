@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 if (!isset($_SESSION['isAdmin']) || $_SESSION['isAdmin'] == false) {
     header('Location: login.php?error=1');
 }
@@ -21,7 +22,7 @@ require_once 'navbar.php';
 
     <?php require_once 'station.php';?>
 
-    <h3 class="staff-title">Staff</h3>
+    <h3 class='staff-admin'>Staff</h3>
     <table class="table">
         <thead>
             <tr class='table-header'>
@@ -39,21 +40,24 @@ require_once 'navbar.php';
 
             <?php
 foreach ($staff as $i => $user): ?>
+
             <tr class='table-row'>
                 <th scope="row"><?php echo $i + 1 ?></th>
-                <td><?php echo $user['firstName'] ?></td>
-                <td><?php echo $user['lastName'] ?></td>
-                <td><?php echo $user['experience'] ?></td>
-                <td><?php echo $user['salary'] ?></td>
-                <td><?php echo $user['vacationDays'] ?></td>
-                <td><?php echo $user['email'] ?></td>
-                <td><?php echo $_SESSION['password'] ?></td>
+                <td><?=$user['firstName']?></td>
+                <td><?=$user['lastName']?></td>
+                <td><?=$user['experience']?></td>
+                <td><?=$user['salary']?></td>
+                <td><?=$user['vacationDays']?></td>
+                <td><?=$user['email']?></td>
+                <td><?="" ? "" : substr($user['password'], -7) . '...'?>
+                </td>
                 <td>
-                    <form style="display: inline-block;" action="delete.php" method="post">
+                    <!-- <form action="delete.php" method="post">
                         <input type="hidden" name="userID" value="<?php $_SESSION['userID']?>">
                         <button type="submit" class="btn btn-dark">Delete</button>
-                    </form>
-                    <a href="update.php?id=<?php $_SESSION['userID']?>" type="button" class="btn btn-danger">Edit</a>
+                    </form> -->
+                    <a href="edit.php?userID=<?=$user['userID']?>" type="button" class="btn btn-danger">Edit user
+                        info</a>
                 </td>
             </tr>
             <?php endforeach;?>

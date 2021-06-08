@@ -25,7 +25,7 @@ $stationData = $statement->fetchAll(PDO::FETCH_ASSOC);
 
 <body class='container'>
 
-    <h3 class="station-title">Station Data</h3>
+    <h3 class="station-title">Gas station</h3>
     <table class=" table-station table">
         <thead>
             <tr class="table-header">
@@ -53,7 +53,7 @@ foreach ($stationData as $i => $station): ?>
                 <td class="buttons-station">
                     <a href="update.php?id=<?php $station['stationID']?>" type="button"
                         class="btn btn-danger btn-sm">Change
-                        Values</a>
+                        fuel amount</a>
                 </td>
                 <?php endif;?>
 
