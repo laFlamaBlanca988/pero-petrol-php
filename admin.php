@@ -56,7 +56,8 @@ foreach ($staff as $i => $user): ?>
                         <input type="hidden" name="userID" value="<?php $_SESSION['userID']?>">
                         <button type="submit" class="btn btn-dark">Delete</button>
                     </form> -->
-                    <a href="edit.php?userID=<?=$user['userID']?>" type="button" class="btn btn-danger">Edit user
+                    <a href="adminEdit.php?userID=<?=$user['userID']?>" name="adminEdit" type="submit"
+                        class="btn btn-danger">Edit user
                         info</a>
                 </td>
             </tr>
