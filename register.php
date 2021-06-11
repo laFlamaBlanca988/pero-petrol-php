@@ -11,8 +11,7 @@ $gasStation = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["submit"])) {
 
-    $statement = $pdo->
-        prepare('SELECT * FROM users');
+    $statement = $pdo->prepare('SELECT * FROM users');
     // Execute
     $statement->execute();
     //Fetch

@@ -5,11 +5,9 @@ if (!isset($_SESSION['isAdmin']) || $_SESSION['isAdmin'] == false) {
     header('Location: login.php?error=1');
 }
 require_once 'database.php';
-// Prepere for execution
+
 $statement = $pdo->prepare("SELECT * FROM users");
-// Execute
 $statement->execute();
-//Fetch
 $staff = $statement->fetchAll(PDO::FETCH_ASSOC);
 
 ?>

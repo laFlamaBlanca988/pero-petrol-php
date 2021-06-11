@@ -12,5 +12,6 @@
 
     <link href="style.css" rel="stylesheet">
     <link href="adminEdit.css" rel="stylesheet">
+    <link href="userEdit.css" rel="stylesheet">
     <title>Pero Petrol</title>
 </head>
