@@ -26,6 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submitStationEdit']))
     foreach ($stationData as $station) {
 
         if ($_SESSION['isAdmin'] === false) {
+
             $petrol95 = $_POST['petrol95'];
             $petrol98 = $_POST['petrol98'];
             $diesel = $_POST['diesel'];
@@ -82,13 +83,22 @@ foreach ($stationData as $i => $station): ?>
                 <td><?=$station['gas']?></td>
 
 
-                <?php if ($_SESSION['isAdmin'] || $_SESSION['gasStation'] === $station['stationID']): ?>
+                <?php if (!$_SESSION['isAdmin'] && $_SESSION['gasStation'] === $station['stationID']): ?>
                 <td class="buttons-station">
                     <button onclick="openClose('block')" type="button" name="submit"
                         class="btn btn-danger btn-sm">Change fuel
                         amount</button>
                 </td>
                 <?php endif;?>
+
+                <?php if ($_SESSION['isAdmin']): ?>
+                <td class="buttons-station">
+                    <a href="stationsEdit.php?stationID=<?=$station['stationID']?>" name="stationsEdit" type="submit"
+                        class="btn btn-danger btn-sm">Change fuel
+                        amount</a>
+                </td>
+                <?php endif;?>
+
 
             </tr>
             <?php endforeach;?>
@@ -119,6 +129,8 @@ foreach ($stationData as $i => $station): ?>
                 <button type="submit" name="submitStationEdit" class="btn btn-danger btn-sm">Submit</button>
                 <button type="button" class="btn btn-dark btn-sm" onclick="openClose('none')">Close</button>
             </div>
+
+
         </form>
     </div>
 
