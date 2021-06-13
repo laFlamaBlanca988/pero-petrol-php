@@ -1,0 +1,49 @@
+html {
+    margin: 0;
+    padding: 0;
+}
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #ffffff;
+}
+h1 {
+    color:#dc3545 ;
+}
+h5 {
+   padding-top: 0.4rem;    
+}
+h3 {
+    color:#dc3545 ;
+}
+
+
+
+.btn-login {
+    background-color: inherit;
+    color: #b33030;
+    border: none;
+    padding: 0;
+}
+.btn-login:hover {
+    background-color: inherit;
+    color: #599cff;
+}
+
+.table-staff{
+    margin: auto;
+    width: 50rem;
+}
+.table-row {
+    text-align: center;
+    vertical-align:middle;
+}
+.table-header th {
+text-align: center;
+padding: 0.5rem;
+}
+.form-logout {
+margin: 0;
+}
+
+

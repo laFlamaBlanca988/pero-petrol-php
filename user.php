@@ -33,41 +33,39 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submitUserEdit'])) {
 <?php require_once 'navbar.php';?>
 <?php require_once 'headers.php';?>
 
-<body class='container'>
+<body>
 
     <?php require_once 'station.php';?>
+    <h3 class="user-title">Your profile</h3>
+    <div class='user-container'>
+        <table class="table">
+            <thead>
+                <tr class='table-header'>
+                    <th scope="col">First Name</th>
+                    <th scope="col">Last Name</th>
+                    <th scope="col">Experience</th>
+                    <th scope="col">Vacation</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Password</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class='table-row'>
+                    <td><?php echo $_SESSION['firstName'] ?></td>
+                    <td><?php echo $_SESSION['lastName'] ?></td>
+                    <td><?php echo $_SESSION['experience'] ?></td>
+                    <td><?php echo $_SESSION['vacationDays'] ?></td>
+                    <td><?php echo $_SESSION['email'] ?></td>
+                    <td><?php echo $_SESSION['password'] ?></td>
+                    <td>
+                        <button onclick="openCloseForm('block')" type="button"
+                            class="btn btn-danger btn-sm">Edit</button>
+                    </td>
+                </tr>
 
-    <h3 class="staff-title">Your profile</h3>
-    <table class=" table-staff table ">
-        <thead>
-            <tr class='table-header'>
-                <!-- <th scope="col">#</th> -->
-                <th scope="col">First Name</th>
-                <th scope="col">Last Name</th>
-                <th scope="col">Experience</th>
-                <th scope="col">Salary</th>
-                <th scope="col">Vacation</th>
-                <th scope="col">Email</th>
-                <th scope="col">Password</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr class='table-row'>
-                <!-- <th scope="row"><?php echo $i + 1 ?></th> -->
-                <td><?php echo $_SESSION['firstName'] ?></td>
-                <td><?php echo $_SESSION['lastName'] ?></td>
-                <td><?php echo $_SESSION['experience'] ?></td>
-                <td><?php echo $_SESSION['salary'] ?></td>
-                <td><?php echo $_SESSION['vacationDays'] ?></td>
-                <td><?php echo $_SESSION['email'] ?></td>
-                <td><?php echo $_SESSION['password'] ?></td>
-                <td>
-                    <button onclick="openCloseForm('block')" type="button" class="btn btn-danger btn-sm">Edit</button>
-                </td>
-            </tr>
-
-        </tbody>
-    </table>
+            </tbody>
+        </table>
+    </div>
     <div id="overlay" onclick="openCloseForm('none')"></div>
     <div class="form-popup" id="myForm">
         <form action="user.php" method="POST" class="form-container">
@@ -79,7 +77,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submitUserEdit'])) {
             <input type="password" name="password" required>
 
             <button type="submit" name="submitUserEdit" class="btn btn-danger btn-sm">Submit</button>
-            <button type="button" class="btn btn-dark btn-sm" onclick="closeForm('none')">Close</button>
+            <button type="button" class="btn btn-dark btn-sm" onclick="openCloseForm('none')">Close</button>
         </form>
     </div>
 
@@ -92,7 +90,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submitUserEdit'])) {
     </script>
 
 
-
+    <?php require_once 'footer.php'?>
 </body>
 
 </html>

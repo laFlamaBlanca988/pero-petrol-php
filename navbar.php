@@ -2,8 +2,8 @@
 require_once 'headers.php';
 ?>
 
-<header class="fluid">
-    <nav class=" navbar-custom navbar navbar-light bg-light">
+<header class="container-fluid">
+    <nav class="navbar">
         <h1 class="logo"><u>P</u>PETROL</h1>
         <div class="welcome">
             <?="<h5>" . 'Welcome ' . $_SESSION['firstName'] . '!' . "</h5>"?>

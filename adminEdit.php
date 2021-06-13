@@ -6,9 +6,6 @@ $userID = $_GET['userID'] ?? null;
 if (!isset($_SESSION['isAdmin']) || $_SESSION['isAdmin'] == false) {
     header('Location: login.php?error=1');
 }
-// if(isset($_POST['adminEdit']) && $_POST['adminEdit']){
-//     $_SESSION('currentUser') = 
-// }
 
 require_once 'database.php';
 
@@ -34,6 +31,8 @@ foreach($staff as $user) {
     $gs = $user['gasStation'];
     $ex = $user['experience'];
     $sal = $user['salary'];
+    $em = $user['email'];
+    $pass = $user['password'];
 }
 if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])){
     $firstName = $_POST['firstName'];
@@ -71,52 +70,34 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])){
 <?php require_once 'navbar.php'?>
 
 <body>
-    <?php if (!empty($errors)): ?>
-    <div class="alert alert-danger">
-        <?php foreach ($errors as $error): ?>
-        <div><?php echo $error ?></div>
-        <?php endforeach;?>
-    </div>
-    <?php endif;?>
-    <div class="container">
+    <div class="admin--edit-wraper">
+        <?php require_once 'alert.php';?>
         <form action="" method="POST" class="edit-form">
-            <div class="mb-3">
+            <div class='edit-left'>
                 <label>First name</label>
                 <input type="text" name="firstName" value="<?= $fn?>" class="form-control">
-            </div>
-            <div class="mb-3">
                 <label>Last name</label>
                 <input type=text name="lastName" value="<?= $ln ?>" class=" form-control"></input>
-            </div>
-            <div class="mb-3">
                 <label>Email</label>
-                <input type="email" name="email" value="<?php $email ?>" class=" form-control">
-            </div>
-            <div class="mb-3">
+                <input type="email" name="email" value="<?= $em ?>" class=" form-control">
                 <label>Password</label>
-                <input type="password" name="password" value="<?php $password ?>" class=" form-control">
+                <input type="password" name="password" value="<?= $pass ?>" class=" form-control">
             </div>
-            <div class="mb-3">
+            <div class='edit-right'>
                 <label>Gas station</label>
                 <input type="number" name="gasStation" value="<?= $gs ?>" class=" form-control"></input>
-            </div>
-            <div class="mb-3">
                 <label>Vacation days</label>
                 <input type="number" name="vacationDays" value="<?= $vd ?>" class=" form-control"></input>
-            </div>
-            <div class="mb-3">
                 <label>Salary</label>
                 <input type="number" name="salary" value="<?= $sal ?>" class=" form-control"></input>
-            </div>
-            <div class="mb-3">
                 <label>Experience</label>
                 <input type="number" name="experience" value="<?= $ex ?>" class=" form-control"></input>
             </div>
-            <div class="edit-user-buttons">
-                <a href="admin.php" type="submit" class="btn btn-dark">Dismiss</a>
+            <div class="edit--form-buttons">
                 <button type="submit" name='submit' class="btn btn-danger">Save changes</button>
+                <a href="admin.php" type="submit" class="btn btn-dark">Dismiss</a>
             </div>
         </form>
     </div>
-
+    <?php require_once 'footer.php'?>
 </body>

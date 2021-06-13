@@ -67,11 +67,10 @@
     display: none;
     position: fixed;
     bottom: 3.6rem;
-    right: 2.5rem;
+    right: 16rem;
     margin: 0;
     border: 3px solid #f1f1f1;
     z-index: 9;
-    
   }
   .formStation-container {
     display: flex;

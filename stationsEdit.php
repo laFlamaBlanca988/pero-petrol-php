@@ -32,10 +32,10 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submitEditFuel'])){
     $diesel = $_POST['diesel'];
     $gas = $_POST['gas'];
     
-    // if (!$firstName || !$lastName || !$email || !$password || !$gasStation || !$vacationDays || !$experience || !$salary) {
-    //     $errors[0] = 'All fields are required';
+    if (!$petrol95 || !$petrol98 || !$diesel || !$gas) {
+        $errors[0] = 'All fields are required';
 
-    // }
+    }
     if(empty($errors)){  
         $statement = $pdo->prepare("UPDATE gas_stations SET petrol95 = :petrol95, petrol98 = :petrol98, diesel = :diesel, gas = :gas WHERE stationID = :stationID");
         $statement->bindValue(':petrol95', $petrol95);
@@ -54,16 +54,12 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submitEditFuel'])){
 <?php require_once 'headers.php'?>
 <?php require_once 'navbar.php'?>
 
-<body class='container'>
-    <?php if (!empty($errors)): ?>
-    <div class="alert alert-danger">
-        <?php foreach ($errors as $error): ?>
-        <div><?php echo $error ?></div>
-        <?php endforeach;?>
-    </div>
-    <?php endif;?>
-    <div class="container">
-        <form action="" method="POST" class="edit-form">
+<body>
+    <div class='form-wraper'>
+
+        <?php require_once 'alert.php'?>
+
+        <form action="" method="POST" class="edit--form-station">
             <div class="mb-3">
                 <label>Petrol 95</label>
                 <input type="number" name="petrol95" value="<?= $petrol95UI?>" class="form-control">
@@ -81,10 +77,10 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submitEditFuel'])){
                 <input type="number" name="gas" value="<?= $gasUI ?>" class=" form-control">
             </div>
             <div class="edit-user-buttons">
-                <a href="admin.php" type="submit" class="btn btn-dark">Dismiss</a>
                 <button type="submit" name='submitEditFuel' class="btn btn-danger">Save changes</button>
+                <a href="admin.php" type="submit" class="btn btn-dark">Dismiss</a>
             </div>
         </form>
     </div>
-
+    <?php require_once 'footer.php'?>
 </body>

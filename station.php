@@ -56,56 +56,54 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submitStationEdit']))
 
 <?php require_once 'headers.php';?>
 
-<body class='container'>
+<body'>
+    <h3 class="station-title">Gas stations</h3>
+    <div class="station-container">
+        <table class="table-station table">
+            <thead>
+                <tr class="table-header">
+                    <th scope="col">#</th>
+                    <th scope="col">Gas Station</th>
+                    <th scope="col">Petrol 95</th>
+                    <th scope="col">Petrol 98</th>
+                    <th scope="col">Diesel</th>
+                    <th scope="col">Gas</th>
+                </tr>
+            </thead>
+            <tbody>
 
-    <h3 class="station-title">Gas station</h3>
-    <table class=" table-station table">
-        <thead>
-            <tr class="table-header">
-                <th scope="col">#</th>
-                <th scope="col">Gas Station</th>
-                <th scope="col">Petrol 95</th>
-                <th scope="col">Petrol 98</th>
-                <th scope="col">Diesel</th>
-                <th scope="col">Gas</th>
-            </tr>
-        </thead>
-        <tbody>
-
-            <?php
+                <?php
 foreach ($stationData as $i => $station): ?>
-            <tr class="table-row">
-                <td class='text-bold'><?=$i + 1?></td>
-                <td><?=$station['gasStation']?></td>
-                <td><?=$station['petrol95']?></td>
-                <td><?=$station['petrol98']?></td>
-                <td><?=$station['diesel']?></td>
-                <td><?=$station['gas']?></td>
+                <tr class="table-row">
+                    <td class='text-bold'><?=$i + 1?></td>
+                    <td><?=$station['gasStation']?></td>
+                    <td><?=$station['petrol95']?></td>
+                    <td><?=$station['petrol98']?></td>
+                    <td><?=$station['diesel']?></td>
+                    <td><?=$station['gas']?></td>
 
 
-                <?php if (!$_SESSION['isAdmin'] && $_SESSION['gasStation'] === $station['stationID']): ?>
-                <td class="buttons-station">
-                    <button onclick="openClose('block')" type="button" name="submit"
-                        class="btn btn-danger btn-sm">Change fuel
-                        amount</button>
-                </td>
-                <?php endif;?>
+                    <?php if (!$_SESSION['isAdmin'] && $_SESSION['gasStation'] === $station['stationID']): ?>
+                    <td class="buttons-station">
+                        <button onclick="openClose('block')" type="button" name="submit"
+                            class="btn btn-danger btn-sm">Change fuel
+                            amount</button>
+                    </td>
+                    <?php endif;?>
 
-                <?php if ($_SESSION['isAdmin']): ?>
-                <td class="buttons-station">
-                    <a href="stationsEdit.php?stationID=<?=$station['stationID']?>" name="stationsEdit" type="submit"
-                        class="btn btn-danger btn-sm">Change fuel
-                        amount</a>
-                </td>
-                <?php endif;?>
+                    <?php if ($_SESSION['isAdmin']): ?>
+                    <td class="buttons-station">
+                        <a href="stationsEdit.php?stationID=<?=$station['stationID']?>" name="stationsEdit"
+                            type="submit" class="btn btn-danger btn-sm">Change fuel
+                            amount</a>
+                    </td>
+                    <?php endif;?>
+                </tr>
+                <?php endforeach;?>
 
-
-            </tr>
-            <?php endforeach;?>
-
-        </tbody>
-    </table>
-
+            </tbody>
+        </table>
+    </div>
 
     <div id="overlayStation" onclick="openClose('none')"></div>
     <div class="formStation-popup" id="formStation">
@@ -140,6 +138,6 @@ foreach ($stationData as $i => $station): ?>
         document.getElementById("overlayStation").style.display = $display;
     }
     </script>
-</body>
+    </body>
 
-</html>
+    </html>

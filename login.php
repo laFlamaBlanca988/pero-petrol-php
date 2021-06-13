@@ -69,19 +69,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["submit"])) {
 <?php require_once 'headers.php';?>
 
 
-<body class='container'>
-    <div class='form'>
-        <h1 class="login-title">Login Form</h1>
+<body>
+    <div class='login-logo'>
+        <h1 class='register-logo'><u>P</u>PETROL</h1>
+    </div>
 
-        <?php if (!empty($errors)): ?>
-        <div class="alert alert-danger">
-            <?php foreach ($errors as $error): ?>
-            <div><?php echo $error ?></div>
-            <?php endforeach;?>
-        </div>
-        <?php endif;?>
+    <div class="login--form-wraper">
+
+        <?php require_once 'alert.php';?>
 
         <form action="login.php" method="post" class="login-form">
+            <h4 class='login-title'>Sign In</h4>
             <div class="mb-3">
                 <label>Email</label>
                 <input type="email" name="email" value="<?php $email?>" class="form-control">
@@ -90,8 +88,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["submit"])) {
                 <label>Password</label>
                 <input type=password name="password" value="<?php $password?>" class="form-control"></input>
             </div>
-            <button type="submit" name="submit" class="btn btn-primary">Submit</button>
+            <div class="mb-3">
+                <button type="submit" name="submit" class="btn btn-danger">Submit</button>
+            </div>
+
         </form>
+
     </div>
 </body>
 
