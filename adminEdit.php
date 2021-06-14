@@ -6,7 +6,6 @@ $userID = $_GET['userID'] ?? null;
 if (!isset($_SESSION['isAdmin']) || $_SESSION['isAdmin'] == false) {
     header('Location: login.php?error=1');
 }
-
 require_once 'database.php';
 
 $errors = [];
@@ -46,7 +45,6 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])){
     $vacationDays = $_POST['vacationDays'];
     if (!$firstName || !$lastName || !$email || !$password || !$gasStation || !$vacationDays || !$experience || !$salary) {
         $errors[0] = 'All fields are required';
-
     }
     if(empty($errors)){  
         $statement = $pdo->prepare("UPDATE users SET firstName = :firstName, lastName = :lastName, email = :email, password = :password, vacationDays = :vacationDays, experience = :experience, salary = :salary, gasStation = :gasStation WHERE userID = :userID");
@@ -60,7 +58,6 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])){
         $statement->bindValue(':gasStation', $gasStation);
         $statement->bindValue(':userID', $userID);        
         $statement->execute();
-    
         header('Location: admin.php');
     }
  }

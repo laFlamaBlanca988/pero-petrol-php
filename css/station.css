@@ -10,12 +10,10 @@
     background-color:#f8f8f8;
 }
 .station-title {
-   text-align: center;
-   margin-top: 5rem;
+    text-align: center;
+    margin-top: 5rem;
 }
 .table-station {
     margin: auto;
     width: 50rem;
-
-
 }

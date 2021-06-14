@@ -9,15 +9,14 @@ require_once 'database.php';
 $statement = $pdo->prepare("SELECT * FROM users");
 $statement->execute();
 $staff = $statement->fetchAll(PDO::FETCH_ASSOC);
-
 ?>
 
-<?php require_once 'headers.php';
+<?php
+require_once 'headers.php';
 require_once 'navbar.php';
 ?>
 
 <body>
-
     <?php require_once 'station.php';?>
 
     <h3 class='staff-title'>Staff</h3>
@@ -36,10 +35,7 @@ require_once 'navbar.php';
                 </tr>
             </thead>
             <tbody>
-
-                <?php
-foreach ($staff as $i => $user): ?>
-
+                <?php foreach ($staff as $i => $user): ?>
                 <tr class='table-row'>
                     <th scope="row"><?php echo $i + 1 ?></th>
                     <td><?=$user['firstName']?></td>
@@ -56,13 +52,9 @@ foreach ($staff as $i => $user): ?>
                     </td>
                 </tr>
                 <?php endforeach;?>
-
             </tbody>
         </table>
-
-
     </div>
     <?php require_once 'footer.php'?>
 </body>
-
 </html>

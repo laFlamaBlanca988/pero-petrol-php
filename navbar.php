@@ -12,5 +12,4 @@ require_once 'headers.php';
             </form>
         </div>
     </nav>
-
 </header>

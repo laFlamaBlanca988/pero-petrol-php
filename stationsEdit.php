@@ -41,11 +41,9 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submitEditFuel'])){
         $statement->bindValue(':petrol95', $petrol95);
         $statement->bindValue(':petrol98', $petrol98);
         $statement->bindValue(':diesel', $diesel);
-        $statement->bindValue(':gas', $gas);
-  
+        $statement->bindValue(':gas', $gas);  
         $statement->bindValue(':stationID', $stationID);        
         $statement->execute();
-    
         header('Location: admin.php');
     }
  }
@@ -56,9 +54,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submitEditFuel'])){
 
 <body>
     <div class='form-wraper'>
-
         <?php require_once 'alert.php'?>
-
         <form action="" method="POST" class="edit--form-station">
             <div class="mb-3">
                 <label>Petrol 95</label>

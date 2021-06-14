@@ -49,14 +49,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submitStationEdit']))
             header("Refresh: 0");
         }
     }
-
 }
-
 ?>
 
 <?php require_once 'headers.php';?>
 
-<body'>
+<body>
     <h3 class="station-title">Gas stations</h3>
     <div class="station-container">
         <table class="table-station table">
@@ -71,9 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submitStationEdit']))
                 </tr>
             </thead>
             <tbody>
-
-                <?php
-foreach ($stationData as $i => $station): ?>
+                <?php foreach ($stationData as $i => $station): ?>
                 <tr class="table-row">
                     <td class='text-bold'><?=$i + 1?></td>
                     <td><?=$station['gasStation']?></td>
@@ -81,8 +77,6 @@ foreach ($stationData as $i => $station): ?>
                     <td><?=$station['petrol98']?></td>
                     <td><?=$station['diesel']?></td>
                     <td><?=$station['gas']?></td>
-
-
                     <?php if (!$_SESSION['isAdmin'] && $_SESSION['gasStation'] === $station['stationID']): ?>
                     <td class="buttons-station">
                         <button onclick="openClose('block')" type="button" name="submit"
@@ -90,7 +84,6 @@ foreach ($stationData as $i => $station): ?>
                             amount</button>
                     </td>
                     <?php endif;?>
-
                     <?php if ($_SESSION['isAdmin']): ?>
                     <td class="buttons-station">
                         <a href="stationsEdit.php?stationID=<?=$station['stationID']?>" name="stationsEdit"
@@ -100,7 +93,6 @@ foreach ($stationData as $i => $station): ?>
                     <?php endif;?>
                 </tr>
                 <?php endforeach;?>
-
             </tbody>
         </table>
     </div>
@@ -109,26 +101,21 @@ foreach ($stationData as $i => $station): ?>
     <div class="formStation-popup" id="formStation">
         <form action="user.php" method="POST" class="formStation-container">
             <?php foreach ($stationData as $station): ?>
-            <!-- <?php if ($station['stationID'] === $_SESSION['gasStation']): ?> -->
+            <?php if ($station['stationID'] === $_SESSION['gasStation']): ?>
             <label for="petrol95"><b>Petrol95</b></label>
             <input type="number" name="petrol95" value="<?=$station['petrol95']?>">
-
             <label for="petrol98"><b>Petrol98</b></label>
             <input type="number" name="petrol98" value="<?=$station['petrol98']?>">
-
             <label for="diesel"><b>Diesel</b></label>
             <input type="number" name="diesel" value="<?=$station['diesel']?>">
-
             <label for="gas"><b>Gas</b></label>
             <input type="number" name="gas" value="<?=$station['gas']?>">
-            <!-- <?php endif;?> -->
+            <?php endif;?>
             <?php endforeach;?>
             <div class="change--fuel-button">
                 <button type="submit" name="submitStationEdit" class="btn btn-danger btn-sm">Submit</button>
                 <button type="button" class="btn btn-dark btn-sm" onclick="openClose('none')">Close</button>
             </div>
-
-
         </form>
     </div>
 
@@ -138,6 +125,6 @@ foreach ($stationData as $i => $station): ?>
         document.getElementById("overlayStation").style.display = $display;
     }
     </script>
-    </body>
+</body>
 
-    </html>
+</html>

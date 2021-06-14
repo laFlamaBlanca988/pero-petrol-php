@@ -13,12 +13,12 @@ $password = '';
 $gasStation = '';
 $userID = '';
 $isAdmin = '';
+
 if (isset($_GET['error']) && $_GET['error'] == 1) {
     $errors[0] = 'You must login first!';
 }
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["submit"])) {
     $statement = $pdo->prepare('SELECT * FROM users');
-
     $statement->bindValue(':email', $email);
     $statement->bindValue(':password', $password);
     $statement->bindValue(':firstName', $firstName);
@@ -29,10 +29,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["submit"])) {
     $statement->bindValue(':gasStation', $gasStation);
     $statement->bindValue(':userID', $userID);
     $statement->bindValue(':isAdmin', $isAdmin);
-
     $statement->execute();
-    //Fetch
     $staff = $statement->fetchAll(PDO::FETCH_ASSOC);
+
     $email = $_POST['email'];
     $password = $_POST['password'];
 
@@ -60,14 +59,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["submit"])) {
             }
         }
         $errors[0] = !$email || !$password ? 'Password and email required!' : 'Invalid email or password!';
-
     }
-
 }
 ?>
 
 <?php require_once 'headers.php';?>
-
 
 <body>
     <div class='login-logo'>
@@ -91,9 +87,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["submit"])) {
             <div class="mb-3">
                 <button type="submit" name="submit" class="btn btn-danger">Submit</button>
             </div>
-
         </form>
-
     </div>
 </body>
 

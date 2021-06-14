@@ -16,7 +16,6 @@ h5 {
 h3 {
     color:#dc3545 ;
 }
-
 .table-staff{
     margin: auto;
     width: 50rem;
@@ -26,11 +25,11 @@ h3 {
     vertical-align:middle;
 }
 .table-header th {
-text-align: center;
-padding: 0.5rem;
+    text-align: center;
+    padding: 0.5rem;
 }
 .form-logout {
-margin: 0;
+    margin: 0;
 }
 
 

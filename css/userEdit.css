@@ -1,69 +1,61 @@
 #overlay {
-  position: fixed;
-  display: none;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0,0,0,0.5);
-  z-index: 2;
-  cursor: pointer;
+    position: fixed;
+    display: none;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #00000080;
+    z-index: 2;
+    cursor: pointer;
 }
-
 .form-popup {
-  display: none;
-  position: fixed;
-  bottom: 3.6rem;
-  right: 2.5rem;
-  margin: 0;
-  border: 3px solid #f1f1f1;
-  z-index: 9;
-  
+    display: none;
+    position: fixed;
+    bottom: 3.6rem;
+    right: 2.5rem;
+    margin: 0;
+    border: 3px solid #f1f1f1;
+    z-index: 9;
 }
-  /* Add styles to the form container */
-  .form-container {
+.form-container {
     max-width: 300px;
     padding: 10px;
     background-color: white;
-  }
-  
-  /* Full-width input fields */
-  .form-container input[type=text], .form-container input[type=password] {
+}
+.form-container input[type=text], .form-container input[type=password] {
     width: 100%;
     padding: 15px;
     margin: 5px 0 22px 0;
     border: none;
     background: #f1f1f1;
-  }
-  
-  /* When the inputs get focus, do something */
-  .form-container input[type=text]:focus, .form-container input[type=password]:focus {
-    background-color: #ddd;
-    outline: none;
-  }
-
-  .table-row td {
-    text-align: center;
-  } 
-
-#overlayStation {
-  position: fixed;
-  display: none;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0,0,0,0.5);
-  z-index: 2;
-  cursor: pointer;
 }
   
-  /* The popup form - hidden by default */
-  .formStation-popup {
+.form-container input[type=text]:focus, .form-container input[type=password]:focus {
+    background-color: #ddd;
+    outline: none;
+}
+
+.table-row td {
+    text-align: center;
+} 
+
+#overlayStation {
+    position: fixed;
+    display: none;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 2;
+    cursor: pointer;
+}
+.formStation-popup {
     display: none;
     position: fixed;
     bottom: 3.6rem;
@@ -71,8 +63,8 @@
     margin: 0;
     border: 3px solid #f1f1f1;
     z-index: 9;
-  }
-  .formStation-container {
+}
+.formStation-container {
     display: flex;
     flex-direction: column;
     gap: 0.4rem;
@@ -80,24 +72,20 @@
     max-width: 300px;
     padding: 10px;
     background-color: white;
-  }
-  .formStation-container input[type=number], .formStation-container input[type=number] {
+}
+.formStation-container input[type=number], .formStation-container input[type=number] {
     width: 100%;
-    /* padding: 0rem; */
     margin: 0;
     border: none;
     background: #f1f1f1;
-  }
-  .formStation-container input[type=number]:focus, .formStation-container input[type=number]:focus {
+}
+.formStation-container input[type=number]:focus, .formStation-container input[type=number]:focus {
     background-color: #ddd;
     outline: none;
-  }
-/* .formStation-container label {
-  padding: 0.3rem;
-} */
+}
 .change--fuel-button {
-  display: flex;
-  flex-direction: column;
-  padding-top: 1.7rem;
-  gap: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    padding-top: 1.7rem;
+    gap: 0.5rem;
 }

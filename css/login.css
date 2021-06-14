@@ -17,14 +17,13 @@
     border-radius: 5px;
     box-shadow: hsla(0, 0%, 0%, 0.35) 0px 5px 15px;   
 }
-
 .login-title {
     padding: 0.4rem 0;
 }
 .login-logo {
-   margin: auto;
-   text-align: center;
-margin-top: 3rem;
+    margin: auto;
+    text-align: center;
+    margin-top: 3rem;
 }
 .login-form label {
     font-weight: 600;
