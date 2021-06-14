@@ -10,7 +10,6 @@
 }
 .reg-form {
     margin: auto;
-    /* margin-top: 3rem; */
     padding: 1.5rem;
     padding-bottom: 0;
     display: flex;
@@ -18,7 +17,7 @@
     justify-content: space-between;
     flex-wrap: wrap;
     max-width: 40rem;
-    border-radius: 5px;
+    border-radius: 10px;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;   
 }
 .edit--form-right {

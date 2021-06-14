@@ -56,7 +56,6 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])){
     if (!$firstName || !$lastName || !$email || !$password || !$gasStation || !$vacationDays || !$experience || !$salary) {
         $errors[0] = 'All fields are required';
     }
-
     if(empty($errors)){  
         $statement = $pdo->prepare("UPDATE users SET firstName = :firstName, lastName = :lastName, email = :email, password = :password, vacationDays = :vacationDays, experience = :experience, salary = :salary, gasStation = :gasStation WHERE userID = :userID");
         $statement->bindValue(':firstName', $firstName);
@@ -80,6 +79,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])){
 
 <body>
     <div class="admin--edit-wraper">
+        <h3 class='user--profile-name'><?="$fn $ln"?></h3>
         <?php require_once 'alert.php';?>
         <form action="" method="POST" class="edit-form">
             <div class='edit-left'>

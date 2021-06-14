@@ -7,7 +7,6 @@ if (!isset($_SESSION['isAdmin']) || $_SESSION['isAdmin'] == false) {
 require_once 'database.php';
 
 $stationID = $_GET['stationID'] ?? null;
-
 $errors = [];
 $petrol95 = '';
 $petrol98 = '';
@@ -57,6 +56,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submitEditFuel'])){
     <div class='form-wraper'>
 
         <?php require_once 'alert.php'?>
+        <h3 class='station-name'>Station <?=$stationID?></h3>
 
         <form action="" method="POST" class="edit--form-station">
             <div class="mb-3">
@@ -75,7 +75,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submitEditFuel'])){
                 <label>Gas</label>
                 <input type="number" name="gas" min="0" value="<?= $gasUI ?>" class=" form-control">
             </div>
-            <div class="edit-user-buttons">
+            <div class="edit--station-buttons">
                 <button type="submit" name='submitEditFuel' class="btn btn-danger">Save changes</button>
                 <a href="admin.php" type="submit" class="btn btn-dark">Dismiss</a>
             </div>
