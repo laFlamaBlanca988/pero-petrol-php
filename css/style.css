@@ -17,19 +17,6 @@ h3 {
     color:#dc3545 ;
 }
 
-
-
-.btn-login {
-    background-color: inherit;
-    color: #b33030;
-    border: none;
-    padding: 0;
-}
-.btn-login:hover {
-    background-color: inherit;
-    color: #599cff;
-}
-
 .table-staff{
     margin: auto;
     width: 50rem;
