@@ -30,6 +30,7 @@ require_once 'navbar.php';
                     <th scope="col">Experience</th>
                     <th scope="col">Salary</th>
                     <th scope="col">Vacation Days</th>
+                    <th scope="col">Station</th>
                     <th scope="col">Email</th>
                     <th scope="col">Password</th>
                 </tr>
@@ -43,6 +44,7 @@ require_once 'navbar.php';
                     <td><?=$user['experience']?></td>
                     <td><?=$user['salary']?></td>
                     <td><?=$user['vacationDays']?></td>
+                    <td max='3'><?="Station " . $user['gasStation'] . ""?></td>
                     <td><?=$user['email']?></td>
                     <td><?="" ? "" : substr($user['password'], -7) . '...'?>
                     </td>
@@ -57,4 +59,5 @@ require_once 'navbar.php';
     </div>
     <?php require_once 'footer.php'?>
 </body>
+
 </html>

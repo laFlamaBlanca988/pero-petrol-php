@@ -1,11 +1,11 @@
 <?php
 session_start();
 
-$userID = $_GET['userID'] ?? null;
-
 if (!isset($_SESSION['isAdmin']) || $_SESSION['isAdmin'] == false) {
     header('Location: login.php?error=1');
 }
+$userID = $_GET['userID'] ?? null;
+
 require_once 'database.php';
 
 $errors = [];
@@ -18,6 +18,7 @@ $salary = '';
 $vacationDays = '';
 $experience = '';
 $pass = '';
+
 $statement = $pdo->prepare("SELECT * FROM users WHERE userID = :userID");
 $statement->bindValue(':userID', $userID);
 $statement->execute();
@@ -33,6 +34,7 @@ foreach($staff as $user) {
     $em = $user['email'];
     $pass = $user['password'];
 }
+
 if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])){
     $firstName = $_POST['firstName'];
     $lastName = $_POST['lastName'];
@@ -43,9 +45,18 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])){
     $salary = $_POST['salary'];
     $experience = $_POST['experience'];
     $vacationDays = $_POST['vacationDays'];
+
+    $uppercase = preg_match('@[A-Z]@', $password);
+    $lowercase = preg_match('@[a-z]@', $password);
+    $number = preg_match('@[0-9]@', $password);
+    
+    if (!$uppercase || !$lowercase || !$number || strlen($password) < 8) {
+        $errors[0] = 'Password should be at least 8 characters in length and should include at least one upper case letter and one number.';
+    } 
     if (!$firstName || !$lastName || !$email || !$password || !$gasStation || !$vacationDays || !$experience || !$salary) {
         $errors[0] = 'All fields are required';
     }
+
     if(empty($errors)){  
         $statement = $pdo->prepare("UPDATE users SET firstName = :firstName, lastName = :lastName, email = :email, password = :password, vacationDays = :vacationDays, experience = :experience, salary = :salary, gasStation = :gasStation WHERE userID = :userID");
         $statement->bindValue(':firstName', $firstName);
@@ -58,6 +69,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])){
         $statement->bindValue(':gasStation', $gasStation);
         $statement->bindValue(':userID', $userID);        
         $statement->execute();
+    
         header('Location: admin.php');
     }
  }
@@ -82,7 +94,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])){
             </div>
             <div class='edit-right'>
                 <label>Gas station</label>
-                <input type="number" name="gasStation" value="<?= $gs ?>" class=" form-control"></input>
+                <input type="number" name="gasStation" max="3" min="1" value="<?= $gs ?>" class=" form-control"></input>
                 <label>Vacation days</label>
                 <input type="number" name="vacationDays" value="<?= $vd ?>" class=" form-control"></input>
                 <label>Salary</label>

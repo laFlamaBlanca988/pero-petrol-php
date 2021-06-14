@@ -23,9 +23,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["submit"])) {
     $dbPassword = password_hash($password, PASSWORD_DEFAULT);
     $gasStation = $_POST['gasStation'];
 
+    $uppercase = preg_match('@[A-Z]@', $password);
+    $lowercase = preg_match('@[a-z]@', $password);
+    $number = preg_match('@[0-9]@', $password);
+
     foreach ($staff as $employee) {
+
         if (!$firstName || !$lastName || !$email || !$password || !$gasStation) {
             $errors[0] = 'All fields are required!';
+        } elseif (!$uppercase || !$lowercase || !$number || strlen($password) < 8) {
+            $errors[0] = 'Password should be at least 8 characters in length and should include at least one upper case letter and one number.';
         } elseif ($password !== $confirmPassword) {
             $errors[0] = 'Wrong password validation!';
         } elseif ($firstName !== $employee['firstName'] || $lastName !== $employee['lastName'] || $gasStation !== $employee['gasStation']) {

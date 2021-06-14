@@ -1,12 +1,12 @@
 <?php
 session_start();
 
-$stationID = $_GET['stationID'] ?? null;
-
 if (!isset($_SESSION['isAdmin']) || $_SESSION['isAdmin'] == false) {
     header('Location: login.php?error=1');
 }
 require_once 'database.php';
+
+$stationID = $_GET['stationID'] ?? null;
 
 $errors = [];
 $petrol95 = '';
@@ -41,9 +41,10 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submitEditFuel'])){
         $statement->bindValue(':petrol95', $petrol95);
         $statement->bindValue(':petrol98', $petrol98);
         $statement->bindValue(':diesel', $diesel);
-        $statement->bindValue(':gas', $gas);  
+        $statement->bindValue(':gas', $gas);
         $statement->bindValue(':stationID', $stationID);        
         $statement->execute();
+    
         header('Location: admin.php');
     }
  }
@@ -54,23 +55,25 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submitEditFuel'])){
 
 <body>
     <div class='form-wraper'>
+
         <?php require_once 'alert.php'?>
+
         <form action="" method="POST" class="edit--form-station">
             <div class="mb-3">
                 <label>Petrol 95</label>
-                <input type="number" name="petrol95" value="<?= $petrol95UI?>" class="form-control">
+                <input type="number" name="petrol95" min="0" value="<?= $petrol95UI?>" class="form-control">
             </div>
             <div class="mb-3">
                 <label>Petrol 98</label>
-                <input type=number name="petrol98" value="<?= $petrol98UI ?>" class=" form-control"></input>
+                <input type=number name="petrol98" min="0" value="<?= $petrol98UI ?>" class=" form-control"></input>
             </div>
             <div class="mb-3">
                 <label>Diesel</label>
-                <input type="number" name="diesel" value="<?= $dieselUI ?>" class=" form-control">
+                <input type="number" name="diesel" min="0" value="<?= $dieselUI ?>" class=" form-control">
             </div>
             <div class="mb-3">
                 <label>Gas</label>
-                <input type="number" name="gas" value="<?= $gasUI ?>" class=" form-control">
+                <input type="number" name="gas" min="0" value="<?= $gasUI ?>" class=" form-control">
             </div>
             <div class="edit-user-buttons">
                 <button type="submit" name='submitEditFuel' class="btn btn-danger">Save changes</button>

@@ -29,3 +29,19 @@
     font-weight: 600;
     padding: 0.5rem 0;
 }
+.btn--sign-up {
+    background: transparent;
+    border: none;
+    color: #dc3545;
+    font-weight: 700;
+}
+.btn--sign-up:hover {
+    background: none;
+    color: #da4b59;
+
+}
+.login-buttons {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 0.7rem;
+}
