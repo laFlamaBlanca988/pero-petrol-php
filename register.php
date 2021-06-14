@@ -85,7 +85,7 @@ if (isset($_POST['login'])) {
             </div>
             <div class="reg--form-buttons">
                 <button type="submit" name="submit" class=" btn btn-danger">Submit</button>
-                <button type="submit" name="login" class="btn--reg-login btn btn-login btn-danger ">Login
+                <button type="submit" name="login" class="btn--reg-login btn btn-danger ">Login
                     instead?</button>
             </div>
         </form>

@@ -39,13 +39,15 @@
     display: flex;
     justify-content: space-between;
  }
- .btn-login {
-    background-color: inherit;
-    color: #be1010;
+ .btn--reg-login {
+    background: transparent;
     border: none;
-    padding: 0;
+    color: #dc3545;
+    font-weight: 600;
+    font-size: 1.1rem;
 }
-.btn-login:hover {
-    background-color: inherit;
-    color: #b33030;
+.btn--reg-login:hover {
+    background: none;
+    color: #da4b59;
+    border: none;
 }

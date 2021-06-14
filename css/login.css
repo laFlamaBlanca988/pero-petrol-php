@@ -33,12 +33,13 @@
     background: transparent;
     border: none;
     color: #dc3545;
-    font-weight: 700;
+    font-weight: 600;
+    font-size: 1.1rem;
 }
 .btn--sign-up:hover {
     background: none;
     color: #da4b59;
-
+    border: none;
 }
 .login-buttons {
     display: flex;
