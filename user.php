@@ -37,6 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submitUserEdit'])) {
                     <th scope="col">Last Name</th>
                     <th scope="col">Experience</th>
                     <th scope="col">Vacation</th>
+                    <th scope="col">Station</th>
                     <th scope="col">Email</th>
                     <th scope="col">Password</th>
                 </tr>
@@ -47,6 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submitUserEdit'])) {
                     <td><?=$_SESSION['lastName']?></td>
                     <td><?=$_SESSION['experience']?></td>
                     <td><?=$_SESSION['vacationDays']?></td>
+                    <td><?="Station " . $_SESSION['gasStation'] . ""?></td>
                     <td><?=$_SESSION['email']?></td>
                     <td><?=$_SESSION['password']?></td>
                     <td>
