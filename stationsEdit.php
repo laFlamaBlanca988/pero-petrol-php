@@ -7,6 +7,8 @@ if (!isset($_SESSION['isAdmin']) || $_SESSION['isAdmin'] == false) {
     header('Location: index.php?error=1');
 }
 include_once $_SERVER['DOCUMENT_ROOT'] . "/ppetrol/config/Database.php";
+$database = new Database();
+$db = $database->connect();
 
 $stationID = $_GET['stationID'] ?? null;
 $errors = [];
@@ -35,7 +37,6 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submitEditFuel'])){
     
     if (!$petrol95 || !$petrol98 || !$diesel || !$gas) {
         $errors[0] = 'All fields are required';
-
     }
     if(empty($errors)){  
         $statement = $db->prepare("UPDATE gas_stations SET petrol95 = :petrol95, petrol98 = :petrol98, diesel = :diesel, gas = :gas WHERE stationID = :stationID");

@@ -1,13 +1,13 @@
 <?php
 require_once './login.php';
 require_once './includes/headers.php';
+require_once '../ppetrol/logout.php';
 ?>
 
 <body>
     <div class='login-logo'>
         <h1 class='register-logo'><u>P</u>PETROL</h1>
     </div>
-
     <div class="login--form-wraper">
         <?php require_once './includes/alert.php';?>
         <form action="index.php" method="post" class="login-form">

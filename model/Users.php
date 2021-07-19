@@ -1,11 +1,8 @@
 <?php
-
 class Users
 {
-    // DB stuff
     private $errors = [];
     private $conn;
-    // Users properties
     public $userID;
     public $firstName;
     public $lastName;
@@ -16,15 +13,12 @@ class Users
     public $email;
     public $password;
 
-    // Constructor with DB
     public function __construct($db)
     {
         $this->conn = $db;
     }
-    // Get users
     public function read_users()
     {
-        // Create query
         $query = "SELECT
         gas_stations.gasStation, users.userID, users.firstName, users.lastName, users.experience, users.salary, users.vacationDays, users.email, users.password
         FROM users
@@ -45,16 +39,13 @@ class Users
         LEFT JOIN gas_stations ON gas_stations.stationID = users.gasStation
         WHERE users.userID = ?
         LIMIT 0,1";
-        // Prepare query
+
         $statement = $this->conn->prepare($query);
-        // Bind ID
         $statement->bindParam(1, $this->userID);
-        // Execute query
         $statement->execute();
 
         $row = $statement->fetch(PDO::FETCH_ASSOC);
 
-        // Set properties
         $this->userID = $row['userID'];
         $this->firstName = $row['firstName'];
         $this->lastName = $row['lastName'];
@@ -70,8 +61,6 @@ class Users
 
         $statement = $this->conn->prepare($query);
 
-        // Clean data
-        // $this->userID = htmlspecialchars(strip_tags($this->userID));
         $this->firstName = htmlspecialchars(strip_tags($this->firstName));
         $this->lastName = htmlspecialchars(strip_tags($this->lastName));
         $this->experience = htmlspecialchars(strip_tags($this->experience));
@@ -81,7 +70,6 @@ class Users
         $this->password = htmlspecialchars(strip_tags($this->password));
         $this->gasStation = htmlspecialchars(strip_tags($this->gasStation));
 
-        // $statement->bindParam(':userID', $this->userID);
         $statement->bindParam(':firstName', $this->firstName);
         $statement->bindParam(':lastName', $this->lastName);
         $statement->bindParam(':email', $this->email);
@@ -91,7 +79,6 @@ class Users
         $statement->bindParam(':salary', $this->salary);
         $statement->bindParam(':gasStation', $this->gasStation);
 
-        // Execute query
         if ($statement->execute()) {
             return true;
         }
@@ -105,7 +92,6 @@ class Users
 
         $statement = $this->conn->prepare($query);
 
-        // Clean data
         $this->userID = htmlspecialchars(strip_tags($this->userID));
         $this->firstName = htmlspecialchars(strip_tags($this->firstName));
         $this->lastName = htmlspecialchars(strip_tags($this->lastName));
@@ -126,7 +112,6 @@ class Users
         $statement->bindParam(':salary', $this->salary);
         $statement->bindParam(':gasStation', $this->gasStation);
 
-        // Execute query
         if ($statement->execute()) {
             return true;
         }
@@ -144,7 +129,6 @@ class Users
 
         $statement->bindParam(':userID', $this->userID);
 
-        // Execute query
         if ($statement->execute()) {
             return true;
         }

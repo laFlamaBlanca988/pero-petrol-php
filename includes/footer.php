@@ -1,5 +1,5 @@
 <?php if (!isset($_SESSION['isAdmin'])) {
-    header('Location: login.php?error=1');
+    header('Location: /ppetrol/index.php?error=1');
 }
 require_once 'headers.php';
 

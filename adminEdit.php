@@ -5,7 +5,6 @@ if (!isset($_SESSION)) {
 if (!isset($_SESSION['isAdmin']) || $_SESSION['isAdmin'] == false) {
     header('Location: index.php?error=1');
 }
-
 require_once '../model/Users.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . "/ppetrol/config/Database.php";
 
@@ -81,7 +80,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])){
     }
  }
 
- if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['remove'])){
+if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['remove'])){
         $query = "DELETE FROM users WHERE userID = :userID";
         $statement = $db->prepare($query);
         $statement->bindParam(':userID', $userID);

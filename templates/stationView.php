@@ -5,6 +5,11 @@
     <h3 class="station-title">Gas stations</h3>
     <div class="station-container">
         <table class="table-station table">
+            <div class="barrel-price-container">
+                <p class="barrel-text" scope="col">World barrel price:
+                <p class="barrel-price"> <?=$oilPrice?></p>
+                </p>
+            </div>
             <thead>
                 <tr class="table-header">
                     <th scope="col">#</th>
@@ -13,12 +18,7 @@
                     <th scope="col">Petrol 98</th>
                     <th scope="col">Diesel</th>
                     <th scope="col">Gas</th>
-                    <!-- <div class="barrel-price-container"> -->
-                    <th class="barrel-text" scope="col">World barrel price: <p class="barrel-price"> $79.86</p>
-                    </th>
-                    <!-- </div> -->
                 </tr>
-
             </thead>
             <tbody>
                 <?php foreach ($stationData as $i => $station): ?>
@@ -46,10 +46,8 @@
                 </tr>
                 <?php endforeach;?>
             </tbody>
-
         </table>
         <sup>All units are expressed in barrels</sup>
-
     </div>
 
     <div id="overlayStation" onclick="openClose('none')"></div>

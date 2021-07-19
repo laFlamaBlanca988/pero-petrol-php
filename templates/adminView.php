@@ -1,5 +1,5 @@
 <?php
-require_once '../includes/headers.php';
+include_once '../includes/headers.php';
 require_once '../includes/navbar.php';
 require_once '../admin.php';
 ?>

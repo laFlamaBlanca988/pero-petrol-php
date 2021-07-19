@@ -3,10 +3,12 @@ if (!isset($_SESSION)) {
     session_start();
 }
 if (!isset($_SESSION['isAdmin']) || $_SESSION['isAdmin'] == true) {
-    header('Location: index.php?error=1');
+    header('Location: /ppetrol/index.php?error=1');
+    exit();
 }
-$userID = $_SESSION['userID'];
 require_once '../config/Database.php';
+
+$userID = $_SESSION['userID'];
 $errors = [];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submitUserEdit'])) {

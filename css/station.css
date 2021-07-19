@@ -4,6 +4,7 @@
     margin: auto;
     margin-top: 2rem;  
     padding: 2rem;
+    padding-top: 1rem;
     max-width: 52rem;
     border-radius: 5px;
     box-shadow: rgba(37, 37, 37, 0.35) 0px 4px 15px;
@@ -17,8 +18,13 @@
     margin: auto;
     width: 50rem;
 }
+.barrel-price-container {
+    height: 1.5rem;
+    padding-bottom: 3rem;
+}
 .barrel-text {
-    margin-left: 2rem;
+    display: inline-block;
+    margin-right:0.3rem;
 
 }
 .barrel-price {
