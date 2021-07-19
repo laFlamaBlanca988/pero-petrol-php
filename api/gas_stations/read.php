@@ -3,7 +3,7 @@ header('Acces-Control-Allow-Origin: *');
 header('Content-Type: application/json');
 
 include_once '../../config/Database.php';
-include_once '../../models/GasStations.php';
+include_once '../../model/GasStations.php';
 
 // Instantiate & connect DB
 $database = new Database();
@@ -13,7 +13,7 @@ $db = $database->connect();
 $stationsData = new GasStations($db);
 
 // Users query
-$result = $stationsData->read();
+$result = $stationsData->read_gas_station();
 
 // Get row count
 $num = $result->rowCount();

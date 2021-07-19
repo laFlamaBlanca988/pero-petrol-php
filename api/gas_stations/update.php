@@ -5,7 +5,7 @@ header('Access-Control-Allow-Methods: PUT');
 header('Access-Control-Allow-Headers: Access-Control-Allow-Headers,Content-Type,Access-Control-Allow-Methods, Authorization, X-Requested-With');
 
 include_once '../../config/Database.php';
-include_once '../../models/GasStations.php';
+include_once '../../model/GasStations.php';
 
 // Instantiate & connect DB
 $database = new Database();
@@ -25,7 +25,7 @@ $stationsData->diesel = $data->diesel;
 $stationsData->gas = $data->gas;
 
 // Create post
-if ($stationsData->update()) {
+if ($stationsData->update_station()) {
     echo json_encode(
         array('Message' => 'Post Updated')
     );

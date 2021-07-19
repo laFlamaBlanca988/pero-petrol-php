@@ -6,9 +6,11 @@ if (!isset($_SESSION['isAdmin']) || $_SESSION['isAdmin'] == false) {
     header('Location: index.php?error=1');
 }
 
- require_once '../model/Users.php';
- require_once 'database.php';
- include_once $_SERVER['DOCUMENT_ROOT'] . "/ppetrol/config/Database.php";
+require_once '../model/Users.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . "/ppetrol/config/Database.php";
+
+$database = new Database();
+$db = $database->connect();
 
 $userID = $_GET['userID'] ?? null;
 
@@ -23,7 +25,9 @@ $vacationDays = '';
 $experience = '';
 $pass = '';
 
-$statement = $pdo->prepare("SELECT * FROM users WHERE userID = :userID");
+$statement = $db->prepare("SELECT
+users.userID, users.firstName, users.lastName, users.experience, users.salary, users.vacationDays, users.email, users.password, users.gasStation FROM users 
+WHERE userID = :userID");
 $statement->bindValue(':userID', $userID);
 $statement->execute();
 $staff = $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -61,7 +65,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])){
         $errors[0] = 'All fields are required';
     }
     if(empty($errors)){  
-        $statement = $pdo->prepare("UPDATE users SET firstName = :firstName, lastName = :lastName, email = :email, password = :password, vacationDays = :vacationDays, experience = :experience, salary = :salary, gasStation = :gasStation WHERE userID = :userID");
+        $statement = $db->prepare("UPDATE users SET firstName = :firstName, lastName = :lastName, email = :email, password = :password, vacationDays = :vacationDays, experience = :experience, salary = :salary, gasStation = :gasStation WHERE userID = :userID");
         $statement->bindValue(':firstName', $firstName);
         $statement->bindValue(':lastName', $lastName);
         $statement->bindValue(':email', $email);
@@ -78,17 +82,11 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])){
  }
 
  if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['remove'])){
-        $database = new Database();
-        $db = $database->connect();
-
         $query = "DELETE FROM users WHERE userID = :userID";
-        $statement = $pdo->prepare($query);
-
+        $statement = $db->prepare($query);
         $statement->bindParam(':userID', $userID);
-
-        // Execute query
+        
         if ($statement->execute()) {
             header('Location: adminView.php');
         }
-
     }

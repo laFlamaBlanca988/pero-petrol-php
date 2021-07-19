@@ -1,5 +1,5 @@
 <?php
-require_once 'database.php';
+require_once './config/Database.php';
 $errors = [];
 
 $firstName = '';
@@ -17,7 +17,10 @@ if (isset($_GET['error']) && $_GET['error'] == 1) {
     $errors[0] = 'You must login first!';
 }
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["submit"])) {
-    $statement = $pdo->prepare('SELECT * FROM users');
+    $database = new Database();
+    $db = $database->connect();
+
+    $statement = $db->prepare('SELECT users.userID, users.firstName, users.lastName, users.experience, users.salary, users.vacationDays, users.email, users.password, users.gasStation, users.isAdmin FROM users');
     $statement->bindValue(':email', $email);
     $statement->bindValue(':password', $password);
     $statement->bindValue(':firstName', $firstName);

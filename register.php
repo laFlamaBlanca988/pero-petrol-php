@@ -5,8 +5,7 @@ if (!isset($_SESSION)) {
 if (!isset($_SESSION['isAdmin']) || $_SESSION['isAdmin'] == false) {
     header('Location: index.php?error=1');
 }
-require_once 'database.php';
-
+require_once '../config/Database.php';
 $errors = [];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["submitUser"])) {
@@ -36,7 +35,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["submitUser"])) {
     } elseif ($password !== $confirmPassword) {
         $errors[0] = 'Wrong password validation!';
     } else {
-        $statement = $pdo->prepare("INSERT INTO users SET  firstName = :firstName, lastName = :lastName, email = :email, password = :password, vacationDays = :vacationDays, experience = :experience, salary = :salary, gasStation = :gasStation, isAdmin = :isAdmin");
+        $database = new Database();
+        $db = $database->connect();
+
+        $statement = $db->prepare("INSERT INTO users SET  firstName = :firstName, lastName = :lastName, email = :email, password = :password, vacationDays = :vacationDays, experience = :experience, salary = :salary, gasStation = :gasStation, isAdmin = :isAdmin");
         $statement->bindValue(':firstName', $firstName);
         $statement->bindValue(':lastName', $lastName);
         $statement->bindValue(':email', $email);

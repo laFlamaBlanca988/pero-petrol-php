@@ -5,7 +5,7 @@ header('Access-Control-Allow-Origin: *');
 if (!isset($_SESSION['isAdmin'])) {
     header('Location: loginView.php?error=1');
 }
-require_once 'database.php';
+require_once '../config/Database.php';
 
 $gasStation = "Station " . $_SESSION['gasStation'] . "";
 $petrol95 = '';
@@ -14,7 +14,13 @@ $diesel = '';
 $gas = '';
 $stationID = $_SESSION['gasStation'];
 
-$statement = $pdo->prepare("SELECT * FROM gas_stations");
+$database = new Database();
+$db = $database->connect();
+$statement = $db->prepare("SELECT
+gas_stations.gasStation, gas_stations.stationID, gas_stations.petrol95, gas_stations.petrol98, gas_stations.diesel, gas_stations.gas
+FROM gas_stations
+ORDER BY stationID
+ ");
 $statement->bindValue(':gasStation', $gasStation);
 $statement->bindValue(':petrol95', $petrol95);
 $statement->bindValue(':petrol98', $petrol98);
@@ -40,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submitStationEdit']))
             $_SESSION['diesel'] = $station['diesel'];
             $_SESSION['gas'] = $station['gas'];
 
-            $statement = $pdo->prepare("UPDATE gas_stations SET gasStation = :gasStation, petrol95 = :petrol95, petrol98 = :petrol98, diesel = :diesel, gas = :gas WHERE stationID = :stationID");
+            $statement = $db->prepare("UPDATE gas_stations SET gasStation = :gasStation, petrol95 = :petrol95, petrol98 = :petrol98, diesel = :diesel, gas = :gas WHERE stationID = :stationID");
             $statement->bindValue(':gasStation', $gasStation);
             $statement->bindValue(':petrol95', $petrol95);
             $statement->bindValue(':petrol98', $petrol98);

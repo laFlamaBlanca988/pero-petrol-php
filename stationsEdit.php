@@ -6,7 +6,7 @@ if (!isset($_SESSION)) {
 if (!isset($_SESSION['isAdmin']) || $_SESSION['isAdmin'] == false) {
     header('Location: index.php?error=1');
 }
-require_once 'database.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . "/ppetrol/config/Database.php";
 
 $stationID = $_GET['stationID'] ?? null;
 $errors = [];
@@ -15,7 +15,7 @@ $petrol98 = '';
 $diesel = '';
 $gas = '';
 
-$statement = $pdo->prepare("SELECT * FROM gas_stations WHERE stationID = :stationID");
+$statement = $db->prepare("SELECT gas_stations.gasStation, gas_stations.stationID, gas_stations.petrol95, gas_stations.petrol98, gas_stations.diesel, gas_stations.gas FROM gas_stations WHERE stationID = :stationID");
 $statement->bindValue(':stationID', $stationID);
 $statement->execute();
 $stationData = $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -38,7 +38,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submitEditFuel'])){
 
     }
     if(empty($errors)){  
-        $statement = $pdo->prepare("UPDATE gas_stations SET petrol95 = :petrol95, petrol98 = :petrol98, diesel = :diesel, gas = :gas WHERE stationID = :stationID");
+        $statement = $db->prepare("UPDATE gas_stations SET petrol95 = :petrol95, petrol98 = :petrol98, diesel = :diesel, gas = :gas WHERE stationID = :stationID");
         $statement->bindValue(':petrol95', $petrol95);
         $statement->bindValue(':petrol98', $petrol98);
         $statement->bindValue(':diesel', $diesel);
