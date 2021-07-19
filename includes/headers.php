@@ -13,7 +13,7 @@
     <link href="../css/footer.css" rel="stylesheet">
     <link href="../css/navbar.css" rel="stylesheet">
     <link href="../css/style.css" rel="stylesheet">
-    <link href="../css/login.css" rel="stylesheet">
+    <link href="./css/style.css" rel="stylesheet">
     <link href="./css/login.css" rel="stylesheet">
     <link href="../css/adminEdit.css" rel="stylesheet">
     <link href="../css/admin.css" rel="stylesheet">

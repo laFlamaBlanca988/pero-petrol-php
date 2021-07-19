@@ -3,7 +3,7 @@ if (!isset($_SESSION)) {
     session_start();
 }
 if (!isset($_SESSION['isAdmin']) || $_SESSION['isAdmin'] == false) {
-    header('Location: index.php?error=1');
+    header('Location: ppetrol/index.php?error=1');
 }
 require_once '../config/Database.php';
 $errors = [];

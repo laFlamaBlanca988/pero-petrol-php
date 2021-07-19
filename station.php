@@ -1,9 +1,7 @@
 <?php
 header('Access-Control-Allow-Origin: *');
-// header('Authorization: Token 3880f8b390d1149e07e4a554d34bfc18');
-// header('Content-Type: application/json');
 if (!isset($_SESSION['isAdmin'])) {
-    header('Location: loginView.php?error=1');
+    header('Location: /ppetrol/index.php?error=1');
 }
 require_once '../config/Database.php';
 
@@ -60,27 +58,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submitStationEdit']))
     }
 }
 
-// function getApi($url)
-// {
-//     $handle = curl_init();
+function getApi($url)
+{
+    $handle = curl_init();
+    curl_setopt($handle, CURLOPT_URL, $url);
+    curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($handle, CURLOPT_SSL_VERIFYPEER, 0);
+    curl_setopt($handle, CURLOPT_HTTPHEADER, array("Authorization: Token 1880b7acfcb5fa734b37bc3414b4d623", "Content-Type: application/json"));
 
-//     curl_setopt($handle, CURLOPT_URL, $url);
-//     curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
-//     curl_setopt($handle, CURLOPT_SSL_VERIFYPEER, 0);
-//     curl_setopt($handle, CURLOPT_HTTPHEADER, array("Authorization: Token 1880b7acfcb5fa734b37bc3414b4d623", "Content-Type: application/json"));
-
-//     $data = curl_exec($handle);
-//     if ($e = curl_error($handle)) {
-//         echo $e;
-//     } else {
-//         $decoded = json_decode($data, true);
-//         return $decoded;
-//     }
-//     curl_close($handle);
-// }
-// $oilDataUsa = getApi('https://api.oilpriceapi.com/v1/prices/latest');
-// $oilPrice = $oilDataUsa['data']['formatted'];
-
-date_default_timezone_set('Europe/Sarajevo');
-$date = date("d-m-Y");
-$time = date("H:i:sa");
+    $data = curl_exec($handle);
+    if ($e = curl_error($handle)) {
+        echo $e;
+    } else {
+        $decoded = json_decode($data, true);
+        return $decoded;
+    }
+    curl_close($handle);
+}
+$oilDataUsa = getApi('https://api.oilpriceapi.com/v1/prices/latest');
+$oilPrice = $oilDataUsa['data']['formatted'];

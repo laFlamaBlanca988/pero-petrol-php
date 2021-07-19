@@ -1,33 +1,26 @@
 <?php
-
 class GasStations
 {
-    // DB stuff
     private $conn;
-    // Users properties
     public $stationID;
     public $gasStation;
     public $petrol95;
     public $petrol98;
     public $diesel;
     public $gas;
-    // Constructor with DB
+
     public function __construct($db)
     {
         $this->conn = $db;
     }
-    // Get users
     public function read_gas_station()
     {
-        // Create query
         $query = "SELECT
         gas_stations.gasStation, gas_stations.stationID, gas_stations.petrol95, gas_stations.petrol98, gas_stations.diesel, gas_stations.gas
         FROM gas_stations
         ORDER BY stationID
          ";
-        // Prepare query
         $statement = $this->conn->prepare($query);
-        // Execute query
         $statement->execute();
 
         return $statement;
@@ -40,11 +33,9 @@ class GasStations
         FROM gas_stations
         WHERE gas_stations.stationID = ?
         LIMIT 0,1";
-        // Prepare query
+
         $statement = $this->conn->prepare($query);
-        // Bind ID
         $statement->bindParam(1, $this->stationID);
-        // Execute query
         $statement->execute();
 
         $row = $statement->fetch(PDO::FETCH_ASSOC);
@@ -64,22 +55,18 @@ class GasStations
 
         $statement = $this->conn->prepare($query);
 
-        // Clean data
-        // $this->stationID = htmlspecialchars(strip_tags($this->stationID));
         $this->gasStation = htmlspecialchars(strip_tags($this->gasStation));
         $this->petrol95 = htmlspecialchars(strip_tags($this->petrol95));
         $this->petrol98 = htmlspecialchars(strip_tags($this->petrol98));
         $this->diesel = htmlspecialchars(strip_tags($this->diesel));
         $this->gas = htmlspecialchars(strip_tags($this->gas));
 
-        // $statement->bindParam(':userID', $this->userID);
         $statement->bindParam(':gasStation', $this->gasStation);
         $statement->bindParam(':petrol95', $this->petrol95);
         $statement->bindParam(':petrol98', $this->petrol98);
         $statement->bindParam(':diesel', $this->diesel);
         $statement->bindParam(':gas', $this->gas);
 
-        // Execute query
         if ($statement->execute()) {
             return true;
         }
@@ -93,7 +80,6 @@ class GasStations
 
         $statement = $this->conn->prepare($query);
 
-        // Clean data
         $this->stationID = htmlspecialchars(strip_tags($this->stationID));
         $this->gasStation = htmlspecialchars(strip_tags($this->gasStation));
         $this->petrol95 = htmlspecialchars(strip_tags($this->petrol95));
@@ -108,7 +94,6 @@ class GasStations
         $statement->bindParam(':diesel', $this->diesel);
         $statement->bindParam(':gas', $this->gas);
 
-        // Execute query
         if ($statement->execute()) {
             return true;
         }
@@ -126,7 +111,6 @@ class GasStations
 
         $statement->bindParam(':stationID', $this->stationID);
 
-        // Execute query
         if ($statement->execute()) {
             return true;
         }
