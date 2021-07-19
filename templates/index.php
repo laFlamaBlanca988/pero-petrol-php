@@ -1,0 +1,1 @@
+<?php header('Location: /ppetrol/index.php?error=1');

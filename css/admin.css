@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: column;
     margin: auto;
-    margin-top: 2rem;
+    margin-top: 1.5rem;
     margin-bottom: 5REM;
     max-width: 90%;
     padding: 3rem;
@@ -13,4 +13,12 @@
 .staff-title {
     text-align: center;
     margin-top: 4rem;
+    margin-bottom: 2rem;
+}
+.add-user-container {
+    display: flex;
+    justify-content: space-around;
+}
+.add-user-btn {
+    display: inline-block;
 }

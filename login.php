@@ -1,6 +1,5 @@
 <?php
 require_once 'database.php';
-
 $errors = [];
 
 $firstName = '';
@@ -51,46 +50,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["submit"])) {
             $_SESSION['password'] = $password;
 
             if ($employee['isAdmin']) {
-                header('Location: admin.php');
+                header('Location: /ppetrol/templates/adminView.php');
                 $_SESSION['isAdmin'] = true;
             } else {
-                header('Location: user.php');
+                header('Location: /ppetrol/templates/userView.php');
                 $_SESSION['isAdmin'] = false;
             }
         }
-        $errors[0] = !$email || !$password ? 'Password and email required!' : 'Invalid email or password!';
+        $errors[0] = 'Invalid email or password!';
     }
 }
-?>
-
-<?php require_once 'headers.php';?>
-
-<body>
-    <div class='login-logo'>
-        <h1 class='register-logo'><u>P</u>PETROL</h1>
-    </div>
-
-    <div class="login--form-wraper">
-
-        <?php require_once 'alert.php';?>
-
-        <form action="login.php" method="post" class="login-form">
-            <h4 class='login-title'>Sign In</h4>
-            <div class="mb-3">
-                <label>Email</label>
-                <input type="email" name="email" value="<?php $email?>" class="form-control">
-            </div>
-            <div class="mb-3">
-                <label>Password</label>
-                <input type=password name="password" value="<?php $password?>" class="form-control"></input>
-            </div>
-            <div class="login-buttons mb-3">
-                <button type="submit" name="submit" class="btn btn-danger">Submit</button>
-                <a href="register.php" type="submit" name="signUp" class="btn--sign-up btn btn-danger ">Sign
-                    up?</a>
-            </div>
-        </form>
-    </div>
-</body>
-
-</html>

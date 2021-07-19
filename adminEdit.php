@@ -1,12 +1,16 @@
 <?php
-session_start();
-
-if (!isset($_SESSION['isAdmin']) || $_SESSION['isAdmin'] == false) {
-    header('Location: login.php?error=1');
+if (!isset($_SESSION)) {
+    session_start();
 }
-$userID = $_GET['userID'] ?? null;
+if (!isset($_SESSION['isAdmin']) || $_SESSION['isAdmin'] == false) {
+    header('Location: index.php?error=1');
+}
 
-require_once 'database.php';
+ require_once '../model/Users.php';
+ require_once 'database.php';
+ include_once $_SERVER['DOCUMENT_ROOT'] . "/ppetrol/config/Database.php";
+
+$userID = $_GET['userID'] ?? null;
 
 $errors = [];
 $firstName = '';
@@ -69,44 +73,22 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])){
         $statement->bindValue(':userID', $userID);        
         $statement->execute();
     
-        header('Location: admin.php');
+        header('Location: adminView.php');
     }
  }
-?>
 
-<?php require_once 'headers.php'?>
-<?php require_once 'navbar.php'?>
+ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['remove'])){
+        $database = new Database();
+        $db = $database->connect();
 
-<body>
-    <div class="admin--edit-wraper">
-        <h3 class='user--profile-name'><?="$fn $ln"?></h3>
-        <?php require_once 'alert.php';?>
-        <form action="" method="POST" class="edit-form">
-            <div class='edit-left'>
-                <label>First name</label>
-                <input type="text" name="firstName" value="<?= $fn?>" class="form-control">
-                <label>Last name</label>
-                <input type=text name="lastName" value="<?= $ln ?>" class=" form-control"></input>
-                <label>Email</label>
-                <input type="email" name="email" value="<?= $em ?>" class=" form-control">
-                <label>Password</label>
-                <input type="password" name="password" value="<?= $pass ?>" class=" form-control">
-            </div>
-            <div class='edit-right'>
-                <label>Gas station</label>
-                <input type="number" name="gasStation" max="3" min="1" value="<?= $gs ?>" class=" form-control"></input>
-                <label>Vacation days</label>
-                <input type="number" name="vacationDays" value="<?= $vd ?>" class=" form-control"></input>
-                <label>Salary</label>
-                <input type="number" name="salary" value="<?= $sal ?>" class=" form-control"></input>
-                <label>Experience</label>
-                <input type="number" name="experience" value="<?= $ex ?>" class=" form-control"></input>
-            </div>
-            <div class="edit--form-buttons">
-                <button type="submit" name='submit' class="btn btn-danger">Save changes</button>
-                <a href="admin.php" type="submit" class="btn btn-dark">Dismiss</a>
-            </div>
-        </form>
-    </div>
-    <?php require_once 'footer.php'?>
-</body>
+        $query = "DELETE FROM users WHERE userID = :userID";
+        $statement = $pdo->prepare($query);
+
+        $statement->bindParam(':userID', $userID);
+
+        // Execute query
+        if ($statement->execute()) {
+            header('Location: adminView.php');
+        }
+
+    }

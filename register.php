@@ -1,95 +1,53 @@
 <?php
+if (!isset($_SESSION)) {
+    session_start();
+}
+if (!isset($_SESSION['isAdmin']) || $_SESSION['isAdmin'] == false) {
+    header('Location: index.php?error=1');
+}
 require_once 'database.php';
 
 $errors = [];
 
-$firstName = '';
-$lastName = '';
-$email = '';
-$password = '';
-$confirmPassword = '';
-$gasStation = '';
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["submitUser"])) {
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["submit"])) {
-
-    $statement = $pdo->prepare('SELECT * FROM users');
-    $statement->execute();
-    $staff = $statement->fetchAll(PDO::FETCH_ASSOC);
     $firstName = $_POST['firstName'];
     $lastName = $_POST['lastName'];
     $email = $_POST['email'];
     $password = $_POST['password'];
+    $salary = $_POST['salary'];
+    $vacationDays = $_POST['vacationDays'];
+    $experience = $_POST['experience'];
+    $isAdmin = $_POST['isAdmin'];
     $confirmPassword = $_POST['confirmPassword'];
-    $dbPassword = password_hash($password, PASSWORD_DEFAULT);
     $gasStation = $_POST['gasStation'];
+
+    $dbPassword = password_hash($password, PASSWORD_DEFAULT);
 
     $uppercase = preg_match('@[A-Z]@', $password);
     $lowercase = preg_match('@[a-z]@', $password);
     $number = preg_match('@[0-9]@', $password);
 
-    foreach ($staff as $employee) {
-
-        if (!$firstName || !$lastName || !$email || !$password || !$gasStation) {
-            $errors[0] = 'All fields are required!';
-        } elseif (!$uppercase || !$lowercase || !$number || strlen($password) < 8) {
-            $errors[0] = 'Password should be at least 8 characters in length and should include at least one upper case letter and one number.';
-        } elseif ($password !== $confirmPassword) {
-            $errors[0] = 'Wrong password validation!';
-        } elseif ($firstName !== $employee['firstName'] || $lastName !== $employee['lastName'] || $gasStation !== $employee['gasStation']) {
-            $errors[0] = 'Wrong personal data!';
-        } else {
-            $statement = $pdo->prepare("UPDATE users SET  email = :email, password = :password WHERE firstName = :firstName AND lastName = :lastName AND gasStation = :gasStation");
-            $statement->bindValue(':email', $email);
-            $statement->bindValue(':password', $dbPassword);
-            $statement->bindValue(':firstName', $firstName);
-            $statement->bindValue(':lastName', $lastName);
-            $statement->bindValue(':gasStation', $gasStation);
-            if ($statement->execute()) {
-                header('Location: login.php');
-            }
+    if (!$firstName || !$lastName || !$email || !$password || !$gasStation || !$salary || $vacationDays || !$experience || !$isAdmin || !$confirmPassword) {
+        $errors[] = 'All fields are required!';
+    }
+    if (!$uppercase || !$lowercase || !$number || strlen($password) < 8) {
+        $errors[0] = 'Password should be at least 8 characters in length and should include at least one upper case letter and one number.';
+    } elseif ($password !== $confirmPassword) {
+        $errors[0] = 'Wrong password validation!';
+    } else {
+        $statement = $pdo->prepare("INSERT INTO users SET  firstName = :firstName, lastName = :lastName, email = :email, password = :password, vacationDays = :vacationDays, experience = :experience, salary = :salary, gasStation = :gasStation, isAdmin = :isAdmin");
+        $statement->bindValue(':firstName', $firstName);
+        $statement->bindValue(':lastName', $lastName);
+        $statement->bindValue(':email', $email);
+        $statement->bindValue(':password', $dbPassword);
+        $statement->bindValue(':vacationDays', $vacationDays);
+        $statement->bindValue(':experience', $experience);
+        $statement->bindValue(':salary', $salary);
+        $statement->bindValue(':gasStation', $gasStation);
+        $statement->bindValue(':isAdmin', $isAdmin);
+        if ($statement->execute()) {
+            header('Location: adminView.php');
         }
     }
 }
-if (isset($_POST['login'])) {
-    header('Location: login.php');
-}
-?>
-
-
-<?php require_once 'headers.php';?>
-
-<body class='container'>
-
-    <div>
-        <h1 class='register-logo'><u>P</u>PETROL</h1>
-    </div>
-    <div class="register--form-wraper ">
-        <?php require_once 'alert.php';?>
-        <form action="register.php" method="post" class="reg-form">
-            <div class='edit--form-left'>
-                <h4 class='login-title'>Registration form</h4>
-                <label>First name</label>
-                <input type="text" name="firstName" value="<?php $firstName?>" class="form-control">
-                <label>Last name</label>
-                <input type=text name="lastName" value="<?php $lastName?>" class=" form-control"></input>
-                <label>Email</label>
-                <input type="email" name="email" value="<?php $email?>" class=" form-control">
-            </div>
-            <div class='edit--form-right'>
-                <label>Password</label>
-                <input type="password" name="password" value="<?php $password?>" class=" form-control">
-                <label>Confirm password</label>
-                <input type="password" name="confirmPassword" value="<?php $confirmPassword?>" class=" form-control">
-                <label>Gas station</label>
-                <input type="number" name="gasStation" value="<?php $gasStation?>" class=" form-control"></input>
-            </div>
-            <div class="reg--form-buttons">
-                <button type="submit" name="submit" class=" btn btn-danger">Submit</button>
-                <button type="submit" name="login" class="btn--reg-login btn btn-danger ">Login
-                    instead?</button>
-            </div>
-        </form>
-    </div>
-</body>
-
-</html>
